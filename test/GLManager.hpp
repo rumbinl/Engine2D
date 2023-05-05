@@ -1,21 +1,22 @@
-#ifndef GLManager_hpp
-#define GLManager_hpp
+#ifndef __GLMANAGER__
+#define __GLMANAGER__
 
 #include <GL/gl3w.h>
 #include <iostream>
 #include <vector>
 
+#include <GLShaderManager.hpp>
+
 class GLManager 
 {
 	public:
 		GLManager();
-		GLuint CreateStandardProgram();
-		GLuint CreateStandardVertexShader();
-		static GLuint CreateShader(const GLchar* shader_source, GLint shader_type);
-		GLuint CreateStandardFragmentShader();
+		GLuint CreateStandardShaderProgram();
+		void SetShaderProgram();
 		~GLManager();
 	private:
-		std::vector<GLuint> shader_programs,shaders;
+		std::vector<GLuint> shader_programs;
+		uint32_t current_shader_program_index;
 };
 
 #endif

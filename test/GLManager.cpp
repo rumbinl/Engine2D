@@ -2,42 +2,26 @@
 
 GLManager::GLManager()
 {
+	this->CreateStandardShaderProgram();
+	current_shader_program_index = 0;
+	SetShaderProgram();
 }
 
-GLuint GLManager::CreateStandardProgram()
+void GLManager::SetShaderProgram()
 {
+	glUseProgram(current_shader_program_index);
 }
 
-GLuint GLManager::CreateStandardVertexShader()
+GLuint GLManager::CreateStandardShaderProgram()
 {
-	const GLchar* vertex_shader_source = "#version 330 core\nuniform mat4 transform;\nlayout (location=0) in vec4 position;\nvoid main(){\ngl_Position = transform * vec4(position,1.0);\n}\0";
-	return CreateShader(vertex_shader_source,GL_VERTEX_SHADER);
-	
+	this->shader_programs.push_back(GLShaderManager::CreateShaderProgram(GLShaderManager::CreateStandardVertexShader(), GLShaderManager::CreateStandardFragmentShader()));
+	return this->shader_programs.size()-1;
 }
 
-GLuint GLManager::CreateShader(const GLchar* shader_source, GLint shader_type)
-{
-	GLuint shader = glCreateShader(shader_type);
-	glShaderSource(shader,1,&shader_source,NULL);
-	glCompileShader(shader);
-	GLint compile_status;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &compile_status);
-	if(compile_status==GL_FALSE)
-	{
-#ifdef DEBUG		
-		GLchar info_log[512];
-		glGetShaderInfoLog(shader, 1024, NULL, info_log);
-		std::cout<<"SHADER COMPILE ERROR:"<<endl<<info_log<<endl;
-#endif
-	}
-	return shader;
-}
-
-GLuint GLManager::CreateStandardFragmentShader()
-{
-}
 
 GLManager::~GLManager()
 {
+	for(int i=0;i<this->shader_programs.size();i++)
+		glDeleteProgram(this->shader_programs[i]);
 }
 

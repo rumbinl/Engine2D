@@ -2,6 +2,9 @@
 
 #include <GL/gl3w.h>
 #include <GLFW/glfw3.h>
+#include "GLManager.hpp"
+
+#define DEBUG
 
 using namespace std;
 
@@ -21,6 +24,8 @@ int main()
 
 	glClearColor(255,255,255,255);
 
+	GLManager* g = new GLManager();
+
 	while(!glfwWindowShouldClose(w))
 	{
 		glfwSwapBuffers(w);
@@ -30,6 +35,7 @@ int main()
 			glfwSetWindowShouldClose(w,GLFW_TRUE);
 	}
 
+	delete(g);
 	glfwDestroyWindow(w);
 	glfwTerminate();
 
