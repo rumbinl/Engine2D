@@ -26,7 +26,7 @@ int main()
 		glfwSwapBuffers(w);
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT);
-		if(glfwGetKey(GLFW_KEY_ESCAPE)==GLFW_PRESS)
+		if(glfwGetKey(w,GLFW_KEY_ESCAPE)==GLFW_PRESS)
 			glfwSetWindowShouldClose(w,GLFW_TRUE);
 	}
 
