@@ -1,10 +1,8 @@
 #include <GLShaderManager.hpp>
 
-using namespace GLShaderManager;
-
 GLuint CreateStandardVertexShader()
 {
-	const GLchar* vertex_shader_source = "#version 330 core\nuniform mat4 transform;\nlayout (location=0) in vec4 position;\nvoid main(){\ngl_Position = transform * vec4(position,1.0);\n}\0";
+	const GLchar* vertex_shader_source = "#version 330 core\nuniform mat4 transform;\nlayout (location=0) in vec3 position;\nvoid main(){\ngl_Position = transform * vec4(position,1.0);\n}\0";
 	return CreateShader(vertex_shader_source, GL_VERTEX_SHADER);
 	
 }

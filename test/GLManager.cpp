@@ -14,7 +14,7 @@ void GLManager::SetShaderProgram()
 
 GLuint GLManager::CreateStandardShaderProgram()
 {
-	this->shader_programs.push_back(GLShaderManager::CreateShaderProgram(GLShaderManager::CreateStandardVertexShader(), GLShaderManager::CreateStandardFragmentShader()));
+	this->shader_programs.push_back(CreateShaderProgram(CreateStandardVertexShader(), CreateStandardFragmentShader()));
 	return this->shader_programs.size()-1;
 }
 
